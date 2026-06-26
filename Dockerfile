@@ -18,14 +18,14 @@ COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # 配置文件复制与赋权，如果是入口文件启动，就注释掉这部分
-COPY config.json .
-RUN chown appuser:appgroup config.json && \
-    chmod 640 config.json
+#COPY config.json .
+#RUN chown appuser:appgroup config.json && \
+    #chmod 640 config.json
 
 USER appuser
 
 EXPOSE 8080
 
 # 使用 entrypoint 更新配置然后执行 CMD（CMD 可被 docker run 覆盖）
-#ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["./sing-box", "run", "-c", "config.json"]
