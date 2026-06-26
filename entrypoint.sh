@@ -4,7 +4,7 @@ set -euo pipefail
 # 要下载的 raw 文件 URL（默认指向你的仓库 main 分支）
 RAW_URL="${DENOTS_RAW_URL:-https://raw.githubusercontent.com/rakersfu/sing-box/main/config.json}"
 # 代理其它网站
-#RAW_URL="${DENOTS_RAW_URL:-https://raw.githubusercontent.com/rakersfu/sing-box/main/config.json}"
+#RAW_URL="${DENOTS_RAW_URL:-https://raw.githubusercontent.com/rakersfu/sing-box/main/config_a.json}"
 # 可选：传入期望的 sha256 值以防止被意外改动
 EXPECTED_SHA256="${DENOTS_SHA256:-}"
 
@@ -30,5 +30,5 @@ mv "$TMP" /app/config.json
 chmod 644 /app/config.json
 echo "Updated /app/config.json"
 
-# 最后 exec 启动 deno（使用环境变量限制 allow-net，按需调整）
-exec deno run --allow-net --allow-env deno.ts
+# 最后 exec 启动 sing-box
+exec sing-box run -c config.json
