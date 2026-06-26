@@ -9,12 +9,16 @@ WORKDIR /app
 #COPY NOTICE.txt .
 
 ARG SING_BOX_VERSION=1.12.24
-RUN apk add --no-cache wget tar && \
+RUN apk add --no-cache wget tar curl ca-certificates && \
     wget https://github.com/SagerNet/sing-box/releases/download/v${SING_BOX_VERSION}/sing-box-${SING_BOX_VERSION}-linux-amd64.tar.gz && \
     tar -zxvf sing-box-${SING_BOX_VERSION}-linux-amd64.tar.gz && \
     mv sing-box-${SING_BOX_VERSION}-linux-amd64/sing-box ./ && \
     rm -rf sing-box-${SING_BOX_VERSION}-linux-amd64* && \
     apk del wget tar
+
+# 添加 entrypoint
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
 
 COPY config.json .
 
@@ -22,4 +26,4 @@ USER appuser
 
 EXPOSE 8080
 
-CMD ["./sing-box", "run", "-c", "config.json"]
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
