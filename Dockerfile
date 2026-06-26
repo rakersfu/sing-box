@@ -15,12 +15,14 @@ RUN addgroup -g 1000 -S appgroup && \
            /var/cache/apk/*
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
-RUN chmod +x /usr/local/bin/entrypoint.sh
 
 # 配置文件复制与赋权，如果是入口文件启动，就注释掉这部分
 #COPY config.json .
 #RUN chown appuser:appgroup config.json && \
     #chmod 640 config.json
+
+RUN chmod +x /usr/local/bin/entrypoint.sh && \
+    chown -R appuser:appgroup /app
 
 USER appuser
 
