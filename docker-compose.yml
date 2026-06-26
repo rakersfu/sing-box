@@ -1,9 +1,9 @@
-version: '3.8'
+version: '3.9'
 
 services:
   sing-box:
-    image: your-image-name:latest
-    container_name: sing-box-proxy
+    image: xiongli870110/singbox:1.0.0
+    container_name: singbox
     restart: unless-stopped
     ports:
       - "8080:8080"
