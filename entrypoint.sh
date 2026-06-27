@@ -5,8 +5,20 @@ set -e
 # 1. 定义环境变量及默认值
 # ==========================================
 # 如果运行容器时没有传入这些变量，将使用这里的默认值
-# 默认值与你提供的配置文件保持一致
-UUID="${UUID:-588db1b3-0b3f-48d9-98a2-c5574415a400}"
+# 检查 UUID 环境变量，如果未提供则自动生成
+if [ -z "${UUID}" ]; then
+  if command -v uuidgen >/dev/null 2>&1; then
+    UUID=$(uuidgen)
+    echo "[Info] Generated UUID via uuidgen: $UUID"
+  else
+    echo "[Error] uuidgen not found, please install util-linux in the image."
+    exit 1
+  fi
+else
+  echo "[Info] Using provided UUID: $UUID"
+fi
+
+#UUID="${UUID:-588db1b3-0b3f-48d9-98a2-c5574415a400}"
 PORT="${PORT:-8080}"
 WS_PATH="${WS_PATH:-/chat}"
 LISTEN_ADDR="${LISTEN_ADDR:-0.0.0.0}"
