@@ -8,7 +8,7 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - UUID=688db1b3-0b3f-48d9-98a2-c5574415a400
+      #- UUID=688db1b3-0b3f-48d9-98a2-c5574415a400     #不设置时会自动生成
       - PORT=8080
       - WS_PATH=/chat
       - LISTEN_ADDR=0.0.0.0
