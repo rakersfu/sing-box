@@ -2,13 +2,13 @@ version: '3.9'
 
 services:
   sing-box:
-    image: xiongli870110/singbox:1.0.0
+    image: xiongli870110/singbox:1.0.2
     container_name: singbox
     restart: unless-stopped
     ports:
       - "8080:8080"
     environment:
-      - UUID=588db1b3-0b3f-48d9-98a2-c5574415a400
+      - UUID=688db1b3-0b3f-48d9-98a2-c5574415a400
       - PORT=8080
       - WS_PATH=/chat
       - LISTEN_ADDR=0.0.0.0
