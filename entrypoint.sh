@@ -78,11 +78,17 @@ if [ ! -f "$CONFIG_FILE" ]; then
     echo "[Error] Failed to create config file at $CONFIG_FILE"
     exit 1
 fi
-
 echo "[Init] Config generated successfully. Starting sing-box..."
 
 # ==========================================
-# 3. 启动 Sing-box
+# 3. 打印 vless:// 链接
+# ==========================================
+VLESS_LINK="vless://${UUID}@${HOST:-localhost}:${PORT}?type=ws&security=none&path=${WS_PATH}&host=${HOST:-localhost}#VLESS-WS"
+echo "[Link] VLESS WebSocket:"
+echo "$VLESS_LINK"
+
+# ==========================================
+# 4. 启动 Sing-box
 # ==========================================
 # 【关键】使用 exec 替换当前 shell 进程
 # 这样 sing-box 就变成了 PID 1，Docker/K8s 可以直接向其发送信号
