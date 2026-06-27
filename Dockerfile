@@ -6,7 +6,7 @@ ARG SING_BOX_VERSION=1.12.24
 
 RUN addgroup -g 1000 -S appgroup && \
     adduser -u 1000 -S appuser -G appgroup && \
-    apk add --no-cache wget tar ca-certificates && \
+    apk add --no-cache wget tar ca-certificates util-linux && \
     wget -q https://github.com/SagerNet/sing-box/releases/download/v${SING_BOX_VERSION}/sing-box-${SING_BOX_VERSION}-linux-amd64.tar.gz && \
     tar -xzf sing-box-${SING_BOX_VERSION}-linux-amd64.tar.gz && \
     mv sing-box-${SING_BOX_VERSION}-linux-amd64/sing-box ./ && \
